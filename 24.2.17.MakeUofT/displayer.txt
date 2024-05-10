@@ -1,0 +1,183 @@
+// Note: display integer with a maximun of 999. Digit in D1 and decimal point (DP) is not used.//
+
+int value; // Rremember to give initialize the value here.
+
+// Define the pin of the segment. 
+
+int pinA = 2; // Selsct the actual pin connected instead of copying the following.
+int pinB = 3;
+int pinC = 4;
+int pinD = 5;
+int pinE = 6;
+int pinF = 7;
+int pinG = 8;
+
+// Define the pin of the digit.
+int D1 = 22; 
+int D2 = 24; 
+int D3 = 26; 
+int D4 = 28; 
+
+// Define the pin of the decimal point.
+int DP = 30; 
+
+// Set all pin as output.
+void setup() {
+
+  pinMode(pinA, OUTPUT);
+  pinMode(pinB, OUTPUT);
+  pinMode(pinC, OUTPUT);
+  pinMode(pinD, OUTPUT);
+  pinMode(pinE, OUTPUT);
+  pinMode(pinF, OUTPUT);
+  pinMode(pinG, OUTPUT);
+
+  pinMode(D1, OUTPUT);
+  pinMode(D2, OUTPUT);
+  pinMode(D3, OUTPUT);
+  pinMode(D4, OUTPUT);
+
+  pinMode(DP, OUTPUT);
+}
+
+// Display.
+void loop() {
+
+  read_and_display(value);
+}
+
+// Function: setting display individually.
+void number_display(int nstNumber, int digitNum){
+
+  //Decide the digit place.
+  if(digitNum == 1){
+    digitalWrite(D1, LOW);
+    digitalWrite(D2, HIGH);
+    digitalWrite(D3, HIGH);
+    digitalWrite(D4, HIGH);
+  }else if(digitNum == 2){
+    digitalWrite(D1, HIGH);
+    digitalWrite(D2, LOW);
+    digitalWrite(D3, HIGH);
+    digitalWrite(D4, HIGH); 
+  }else if(digitNum == 3){
+    digitalWrite(D1, HIGH);
+    digitalWrite(D2, HIGH);
+    digitalWrite(D3, LOW);
+    digitalWrite(D4, HIGH); 
+  }else{
+    digitalWrite(D1, HIGH);
+    digitalWrite(D2, HIGH);
+    digitalWrite(D3, HIGH);
+    digitalWrite(D4, HIGH); 
+  }
+
+  // Set the segmant arrangement of each number.
+  if(nstNumber == 0){
+    digitalWrite(pinA, HIGH);
+    digitalWrite(pinB, HIGH);
+    digitalWrite(pinC, HIGH);
+    digitalWrite(pinD, HIGH);
+    digitalWrite(pinE, HIGH);
+    digitalWrite(pinF, HIGH);
+    digitalWrite(pinG, LOW);
+  }else if(nstNumber == 1){
+    digitalWrite(pinA, LOW);
+    digitalWrite(pinB, HIGH);
+    digitalWrite(pinC, HIGH);
+    digitalWrite(pinD, LOW);
+    digitalWrite(pinE, LOW);
+    digitalWrite(pinF, LOW);
+    digitalWrite(pinG, LOW);
+  }else if(nstNumber == 2){
+    digitalWrite(pinA, HIGH);
+    digitalWrite(pinB, HIGH);
+    digitalWrite(pinC, LOW);
+    digitalWrite(pinD, HIGH);
+    digitalWrite(pinE, HIGH);
+    digitalWrite(pinF, LOW);
+    digitalWrite(pinG, HIGH);
+  }else if(nstNumber == 3){
+    digitalWrite(pinA, HIGH);
+    digitalWrite(pinB, HIGH);
+    digitalWrite(pinC, HIGH);
+    digitalWrite(pinD, HIGH);
+    digitalWrite(pinE, LOW);
+    digitalWrite(pinF, LOW);
+    digitalWrite(pinG, HIGH);
+  }else if(nstNumber == 4){
+    digitalWrite(pinA, LOW);
+    digitalWrite(pinB, HIGH);
+    digitalWrite(pinC, HIGH);
+    digitalWrite(pinD, LOW);
+    digitalWrite(pinE, LOW);
+    digitalWrite(pinF, HIGH);
+    digitalWrite(pinG, HIGH);
+  }else if(nstNumber == 5){
+    digitalWrite(pinA, HIGH);
+    digitalWrite(pinB, LOW);
+    digitalWrite(pinC, HIGH);
+    digitalWrite(pinD, HIGH);
+    digitalWrite(pinE, LOW);
+    digitalWrite(pinF, HIGH);
+    digitalWrite(pinG, HIGH);
+  }else if(nstNumber == 6){
+    digitalWrite(pinA, HIGH);
+    digitalWrite(pinB, LOW);
+    digitalWrite(pinC, HIGH);
+    digitalWrite(pinD, HIGH);
+    digitalWrite(pinE, HIGH);
+    digitalWrite(pinF, HIGH);
+    digitalWrite(pinG, HIGH);
+  }else if(nstNumber == 7){
+    digitalWrite(pinA, HIGH);
+    digitalWrite(pinB, HIGH);
+    digitalWrite(pinC, HIGH);
+    digitalWrite(pinD, LOW);
+    digitalWrite(pinE, LOW);
+    digitalWrite(pinF, LOW);
+    digitalWrite(pinG, LOW);
+  }else if(nstNumber == 8){
+    digitalWrite(pinA, HIGH);
+    digitalWrite(pinB, HIGH);
+    digitalWrite(pinC, HIGH);
+    digitalWrite(pinD, HIGH);
+    digitalWrite(pinE, HIGH);
+    digitalWrite(pinF, HIGH);
+    digitalWrite(pinG, HIGH);
+  }else if(nstNumber == 9){
+    digitalWrite(pinA, HIGH);
+    digitalWrite(pinB, HIGH);
+    digitalWrite(pinC, HIGH);
+    digitalWrite(pinD, HIGH);
+    digitalWrite(pinE, LOW);
+    digitalWrite(pinF, HIGH);
+    digitalWrite(pinG, HIGH);
+  }
+}
+
+// Function: get digits from the imput and do the final output. 
+void read_and_display(int number){
+
+  // Return 999 when the number is larger than 999.
+  if (number > 999.9) {
+    number = 999.9; 
+  }
+
+  // Get each digit.
+  int firstNumber = int((number %10) - (number - number));  
+  int secondNumber = int(((number % 100) - ((number % 100 % 10))) / 10);
+  int thirdNumber = int((number - (number % 100)) / 100);  
+
+  // delay(5): to ensure that the segment arrangement on each bit is not synchronized.
+  number_display(firstNumber, 1);
+  delay(5);
+  number_display(secondNumber, 2);
+  delay(5);
+  number_display(thirdNumber, 3);
+  delay(5);
+  number_display(fourthNumber, 4);
+  delay(5);
+
+}
+
