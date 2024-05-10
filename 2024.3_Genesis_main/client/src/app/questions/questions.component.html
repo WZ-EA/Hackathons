@@ -1,0 +1,40 @@
+@if (questions[currentQuestion] != null) {
+<div class="questions-container">
+  <mat-progress-bar
+    mode="determinate"
+    [value]="(currentQuestion / questions.length) * 100"
+    color="accent"
+    class="bar"
+  ></mat-progress-bar>
+  <span class="question">{{ questions[currentQuestion].question }}</span>
+  @for(option of questions[currentQuestion].options; track option){
+  <button
+    class="btn-option"
+    (click)="answer(option)"
+  >
+    <span class="btn-text">{{ option }}</span>
+  </button>
+  }
+</div>
+} 
+@else if (currentQuestion == questions.length && questions.length != 0){
+  <div class="questions-container">
+    <!-- write if 0<questions.length - incorrectanswers.length <5, print train harder
+    if 5<= questions.length - incorrectanswers.length<8, print almost there, 
+  if 8<=questions.length - incorrectanswers.length <=10, print congratulations  -->
+      @if(questions.length - incorrectAnswers.length < 5){
+        <h1>Safety!</h1>
+      }@else if(questions.length - incorrectAnswers.length < 8){
+        <h1>Almost there!</h1>
+      }@else{
+        <h1>Congratulations!!!</h1>
+      } 
+  <h1>{{questions.length - incorrectAnswers.length}} / {{questions.length}}</h1>
+  <span>{{feedback}}</span>
+  </div>
+  
+}
+
+@if (isLoading) {
+  <app-spinner/>
+}

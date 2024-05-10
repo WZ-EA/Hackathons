@@ -1,0 +1,39 @@
+.dashboard-container {
+    display: flex;
+    max-width: 400px;
+    flex-direction: column;
+    padding: 12px;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+  }
+
+  .text{
+    width: 70%;
+    padding: 20px;
+    text-align: center;
+    color: white;
+  }
+
+  .btn {
+    width: 80%;
+    height: 60px;
+    color: mat-color(white);
+  }
+  
+  img {
+    width: 80%;
+    height: 80%;
+    object-position: center;
+  }

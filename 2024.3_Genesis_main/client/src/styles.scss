@@ -1,0 +1,58 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$red-palette: (
+    '50' : #fee8e7,
+    '100' : #fcc7c3,
+    '200' : #faa19b,
+    '300' : #f77b72,
+    '400' : #f65f54,
+    '500' : #f44336,
+    '600' : #f33d30,
+    '700' : #f13429,
+    '800' : #ef2c22,
+    '900' : #ec1e16,
+    'A100' : #ffffff,
+    'A200' : #ffe9e9,
+    'A400' : #ffb8b6,
+    'A700' : #ff9f9c,
+);
+
+$yellow-palette: (
+    '50' : #fff8e1,
+    '100' : #ffecb5,
+    '200' : #ffe083,
+    '300' : #ffd451,
+    '400' : #ffca2c,
+    '500' : #ffc107,
+    '600' : #ffbb06,
+    '700' : #ffb305,
+    '800' : #ffab04,
+    '900' : #ff9e02,
+    'A100' : #ffffff,
+    'A200' : #fffaf2,
+    'A400' : #ffe4bf,
+    'A700' : #ffd9a6,
+    contrast: (
+      500: white,
+    )
+);
+
+$my-primary: mat.define-palette(mat.$red-palette, 500);
+$my-accent: mat.define-palette(mat.$yellow-palette, 500);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent
+ ),
+ typography: mat.define-typography-config(),
+ density: 0,
+));
+
+@include mat.all-component-themes($my-theme);
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f44336; color: white;}
